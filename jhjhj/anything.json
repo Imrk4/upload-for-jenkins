@@ -1,0 +1,171 @@
+{
+	"info": {
+		"_postman_id": "17cd1794-1462-4209-9321-bb46db438dc9",
+		"name": "fo practise",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Signup",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "16d5e424-1824-4ff3-84d9-75a2f4736900",
+						"exec": [
+							"pm.environment.set(\"email\",data.email);\r",
+							"pm.environment.set(\"password\",data.password);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "1f127a0a-8d69-4846-862d-ebd55dd62305",
+						"exec": [
+							"pm.test(\"Status code is 200\", function ()\r",
+							" {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "42e1ce06-7b80-4396-843c-18e3607d25fc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"email\": \"{{email}}\",\r\n\t\"password\": \"{{password}}\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://ecommerceservice.herokuapp.com/user/signup"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cc7353b2-6e2f-4024-aeb3-7cfc129f85f5",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "9cdd7dcd-0673-4bdb-b485-b4d5e336304a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"email\": \"{{email}}\",\r\n\t\"password\": \"{{password}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://ecommerceservice.herokuapp.com/user/login"
+			},
+			"response": []
+		},
+		{
+			"name": "user details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ebb7a44c-f35e-4cc3-af8f-a1cade9166a7",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"const Tokenn=pm.response.json().users[457,456]._id\r",
+							"pm.environment.set(\"Tokken\", Tokenn);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "c22b0d78-03fb-4303-8bd1-55ed7f561f2c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://ecommerceservice.herokuapp.com/user"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea4ba7fc-446d-44ab-8b09-3173936c92d6",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "d503533e-262a-442c-b6a0-254e31634ca4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Token}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "https://ecommerceservice.herokuapp.com/user/{{Tokken}}"
+			},
+			"response": []
+		}
+	]
+}
